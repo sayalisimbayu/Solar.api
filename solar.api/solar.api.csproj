@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
+    <PackageReference Include="ElmahCore" Version="1.2.5" />
+    <PackageReference Include="ElmahCore.Sql" Version="1.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\solar.generics\solar.generics.csproj" />
+    <ProjectReference Include="..\solar.irepo\solar.irepo.csproj" />
+    <ProjectReference Include="..\solar.iservice\solar.iservice.csproj" />
+    <ProjectReference Include="..\solar.messaging\solar.messaging.csproj" />
+    <ProjectReference Include="..\solar.models\solar.models.csproj" />
+  </ItemGroup>
+
+</Project>

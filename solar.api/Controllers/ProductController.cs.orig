@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using localpos.generics.Providers;
+using localpos.iservices;
+using localpos.models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace localpos.api.Controllers
+{
+    [Route("api/Product")]
+    [ApiController]
+    public class ProductController : ControllerBase
+    {
+        private IServicesProvider<IProductService> _productProvider;
+        public ProductController(IServicesProvider<IProductService> productProvider)
+        {
+            _productProvider = productProvider;
+        }
+
+        [HttpGet("{id}/Name")]
+        public Feedback GetName(int id, string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).getName(tenant, id);
+        }
+        [HttpGet("{id}")]
+        public Feedback Get(int id, string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).getById(tenant, id);
+        }
+        [HttpPost]
+        public Feedback Save(Products data, string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).save(tenant, data);
+        }
+<<<<<<< HEAD
+        [HttpGet("{id}/{notificationId}/Delete")]
+        public Feedback Delete(int id, int notificationId, string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).delete(tenant, id, notificationId);
+=======
+        [HttpGet("{id}/{notificationid}/Delete")]
+        public Feedback Delete(int id, int notificationid, string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).delete(tenant, id, notificationid);
+>>>>>>> 3518d54bc3987c10f1f21f061e93d3ffcf2306a4
+        }
+        [HttpGet("{start}/{number}/Page")]
+        public Feedback GetPage(int start, int number, string searchs = "", string orderby = "", string tenant = "")
+        {
+            return _productProvider.GetInstance(tenant).getPage(tenant, start, number, searchs, orderby);
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\solar.generics\solar.generics.csproj" />
+    <ProjectReference Include="..\solar.github.errorlog\solar.github.errorlog.csproj" />
+    <ProjectReference Include="..\solar.irepo\solar.irepo.csproj" />
+    <ProjectReference Include="..\solar.iservice\solar.iservice.csproj" />
+    <ProjectReference Include="..\solar.models\solar.models.csproj" />
+  </ItemGroup>
+
+</Project>
