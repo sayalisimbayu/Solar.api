@@ -19,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using solar.api.Providers;
+using solar.generics.Providers;
 using solar.generics.DataHelper;
 using solar.irepo.Extensions;
 using solar.iservices;

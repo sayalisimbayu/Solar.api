@@ -9,10 +9,19 @@ namespace solar.api.Providers
     public class ServicesProvider<TInterface> : IServicesProvider<TInterface>
     {
         private IHttpContextAccessor _httpContextAccessor;
-
         public ServicesProvider(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
+            GetInstance();
+        }
+
+        public TInterface GetInstance()
+        {
+            string CorrelationId =
+                _httpContextAccessor.HttpContext?.Request.Headers["x-correlationid"] ?? string.Empty;
+
+            var func = this.GetService();
+            return func(CorrelationId);
         }
 
         public TInterface GetInstance(string key)

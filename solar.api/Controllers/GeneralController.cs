@@ -1,4 +1,4 @@
-﻿using solar.api.Providers;
+﻿using solar.generics.Providers;
 using solar.iservices;
 using solar.models;
 using Microsoft.AspNetCore.Mvc;

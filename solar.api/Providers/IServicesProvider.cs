@@ -7,6 +7,7 @@ namespace solar.api.Providers
 {
     public interface IServicesProvider<TInterface>
     {
+        TInterface GetInstance();
         TInterface GetInstance(string key);
     }
 }
