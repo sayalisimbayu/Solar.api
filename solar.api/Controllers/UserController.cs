@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using solar.models;
 using Microsoft.AspNetCore.Authorization;
-using solar.generics.Providers;
+using solar.api.Providers;
 using Microsoft.AspNetCore.Mvc;
 using solar.iservices;
 using System.Threading.Tasks;

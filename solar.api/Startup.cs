@@ -36,16 +36,16 @@ namespace solar.api
             Configuration = configuration;
             DBServer.configuration = Configuration;
             DBServer.setConnectionString();
-            TypesToRegister = Assembly.LoadFrom(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\localpos.services.dll")
+            TypesToRegister = Assembly.LoadFrom(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\solar.services.dll")
                                       .GetTypes()
                                       .Where(x => !string.IsNullOrEmpty(x.Namespace))
                                       .Where(x => x.IsClass)
-                                      .Where(x => x.Namespace.StartsWith("localpos.services")).ToList();
-            TypesToRegister.AddRange(Assembly.LoadFrom(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\localpos.repo.dll")
+                                      .Where(x => x.Namespace.StartsWith("solar.services")).ToList();
+            TypesToRegister.AddRange(Assembly.LoadFrom(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\solar.repo.dll")
                                       .GetTypes()
                                       .Where(x => !string.IsNullOrEmpty(x.Namespace))
                                       .Where(x => x.IsClass)
-                                      .Where(x => x.Namespace.StartsWith("localpos.repo")));
+                                      .Where(x => x.Namespace.StartsWith("solar.repo")));
             SystemConstants.JWT = Configuration.GetSection("SystemKeys").GetValue<String>("JWT");
         }
 
@@ -65,12 +65,12 @@ namespace solar.api
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 
-                        ValidIssuer = "https://localhost:44341",
-                        ValidAudience = "https://localhost:44341",
+                        ValidIssuer = "https://localhost:44308",
+                        ValidAudience = "https://localhost:44308",
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SystemConstants.JWT))
                     };
                 });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddElmah();
             services.AddSignalR();
             services.AddElmah<ElmahCore.Sql.SqlErrorLog>(options =>
@@ -106,7 +106,7 @@ namespace solar.api
             app.UseHttpsRedirection();
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:4200")
+                builder.WithOrigins("http://localhost:4600")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();

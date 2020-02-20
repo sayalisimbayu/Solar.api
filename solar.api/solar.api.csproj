@@ -16,10 +16,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\solar.generics\solar.generics.csproj" />
+    <ProjectReference Include="..\solar.github.errorlog\solar.github.errorlog.csproj" />
     <ProjectReference Include="..\solar.irepo\solar.irepo.csproj" />
     <ProjectReference Include="..\solar.iservice\solar.iservice.csproj" />
     <ProjectReference Include="..\solar.messaging\solar.messaging.csproj" />
     <ProjectReference Include="..\solar.models\solar.models.csproj" />
+    <ProjectReference Include="..\solar.repo\solar.repo.csproj" />
+    <ProjectReference Include="..\solar.services\solar.services.csproj" />
   </ItemGroup>
 
 </Project>

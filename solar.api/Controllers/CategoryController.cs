@@ -1,8 +1,8 @@
-﻿using solar.generics.Providers;
-using solar.iservices;
+﻿using solar.iservices;
 using solar.models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using solar.api.Providers;
 
 namespace solar.api.Controllers.api.Controllers
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using solar.generics.Providers;
 using solar.iservices;
 using solar.messaging;
 using solar.messaging.Model;
@@ -14,6 +13,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using solar.api.Providers;
 
 namespace solar.api.Controllers
 {
