@@ -42,8 +42,8 @@ namespace solar.api.Controllers
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 DateTime expiredIn = DateTime.Now.AddMinutes(30);
                 var tokeOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:44341",
-                    audience: "https://localhost:44341",
+                    issuer: "https://localhost:44308",
+                    audience: "https://localhost:44308",
                     claims: new List<Claim>(),
                     expires: expiredIn,
                     signingCredentials: signinCredentials

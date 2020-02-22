@@ -11,6 +11,6 @@ namespace solar.irepo
         Category getById(int id);
         bool save(Category data);
         bool delete(int id);
-        Tuple<IList<Category>, int> getByPage(int start, int number, string searchs, string orderby);
+        Tuple<IList<Category>, int> getByPage(Paged page);
     }
 }

@@ -48,15 +48,16 @@ namespace solar.repo
             }
         }
 
-        public Tuple<IList<Category>, int> getByPage(int start, int number, string searchs, string orderby)
+        public Tuple<IList<Category>, int> getByPage(Paged page)
         {
             try
             {
-                SqlCommand command = new SqlCommand(String.Format("SELECT C.*,COUNT(P.ID) PRODUCTCOUNT FROM {4} C LEFT JOIN PRODUCTCATEGORIES P ON C.ID=P.CATEGORYID {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4}",
-                    start* number,
-                    number,
-                    (!String.IsNullOrEmpty(searchs) ? String.Format("WHERE {0} AND C.ISDELETED=0 ", searchs) : " WHERE C.ISDELETED=0 ")+ " GROUP BY C.ID,C.NAME,C.ISDELETED ",
-                    (!String.IsNullOrEmpty(orderby) ? String.Format("ORDER BY {0}", orderby) : "ORDER BY C.ID"), tableName));
+                SqlCommand command = new SqlCommand(String.Format("SELECT C.*,COUNT(P.ID) PRODUCTCOUNT FROM {5} C LEFT JOIN PRODUCTCATEGORIES P ON C.ID=P.CATEGORYID {2} {3} {4} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {5} C {2}",
+                    page.pageNumber* page.pageSize,
+                    page.pageSize,
+                    (!String.IsNullOrEmpty(page.search) ? String.Format("WHERE {0} AND C.ISDELETED=0 ", page.search) : " WHERE C.ISDELETED=0 "),
+                    " GROUP BY C.ID,C.NAME,C.ISDELETED ",
+                    (!String.IsNullOrEmpty(page.orderby) ? String.Format("ORDER BY {0}", page.orderby) : "ORDER BY C.ID"), tableName));
 
                 DataSet categoryData = command.ExecuteDataSet();
                 if (categoryData.Tables[0].Rows.Count == 0)

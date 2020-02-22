@@ -44,10 +44,10 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _categoryProvider.delete(tenant, id, notificationid);
         }
-        [HttpGet("{start}/{number}/Page"), Authorize]
-        public Feedback GetPage(int start, int number, string searchs = "", string orderby = "", string tenant = "")
+        [HttpPost("Page")]
+        public Feedback GetPage(Paged page, string tenant = "")
         {
-            return _categoryProvider.getPage(tenant, start, number, searchs, orderby);
+            return _categoryProvider.getPage(tenant, page);
         }
 
     }

@@ -20,7 +20,7 @@ namespace solar.services
         readonly IHubContext<NotificationHub> _hubContext;
         public CategoryService(IServicesProvider<ICategoryRepo> categoryRepo,
             IServicesProvider<IProductCategoryRepo> productCategoryRepo,
-            IServicesProvider<IAppNotificationRepo> notificationRepo, 
+            IServicesProvider<IAppNotificationRepo> notificationRepo,
             IHttpContextAccessor accessor,
             IHubContext<NotificationHub> hubContext)
         {
@@ -169,12 +169,12 @@ namespace solar.services
             return feedback;
         }
 
-        public Feedback getPage(string tenant, int start, int number, string searchs, string orderby)
+        public Feedback getPage(string tenant, Paged page)
         {
             Feedback feedback = new Feedback();
             try
             {
-                var productList = _categoryRepo.GetInstance(tenant).getByPage(start, number, searchs, orderby);
+                var productList = _categoryRepo.GetInstance(tenant).getByPage(page);
                 if (productList != null)
                 {
                     feedback = new Feedback
@@ -202,7 +202,7 @@ namespace solar.services
                     Message = "Got the error while retriving data",
                     data = ex
                 };
-                GitHub.createIssue(ex, new { tenant = tenant, start = start, number = number, searchs = searchs, orderby = orderby }, _accessor.HttpContext.Request.Headers);
+                GitHub.createIssue(ex, new { tenant = tenant, pageData = page }, _accessor.HttpContext.Request.Headers);
             }
             return feedback;
         }
