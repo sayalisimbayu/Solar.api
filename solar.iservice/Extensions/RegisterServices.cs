@@ -3,8 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using solar.iservice;
-
 namespace solar.iservices.Extensions
 {
     public static class RegisterServices
