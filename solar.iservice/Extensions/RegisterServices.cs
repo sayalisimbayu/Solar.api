@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using solar.iservice;
 
 namespace solar.iservices.Extensions
 {
@@ -16,6 +17,7 @@ namespace solar.iservices.Extensions
             services.AddScopedDynamic<IAppNotificationService>(TypesToRegister);
             services.AddScopedDynamic<IUserService>(TypesToRegister);
             services.AddScopedDynamic<IGeneralService>(TypesToRegister);
+            services.AddScopedDynamic<IExcelService>(TypesToRegister);
         }
     }
 }

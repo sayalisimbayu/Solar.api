@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\solar.generics\solar.generics.csproj" />
     <ProjectReference Include="..\solar.github.errorlog\solar.github.errorlog.csproj" />
     <ProjectReference Include="..\solar.irepo\solar.irepo.csproj" />

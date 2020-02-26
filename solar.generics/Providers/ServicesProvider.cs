@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace solar.generics.Providers
 {
@@ -20,7 +17,7 @@ namespace solar.generics.Providers
         {
             string CorrelationId = 
                 _httpContextAccessor.HttpContext?.Request.Headers["x-correlationid"] ?? string.Empty;
-            
+            CorrelationId = CorrelationId != null ? CorrelationId : "";
             var func = this.GetService();
             return func(CorrelationId);
         }
