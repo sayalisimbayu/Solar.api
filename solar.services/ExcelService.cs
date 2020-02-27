@@ -2,6 +2,7 @@
 using OfficeOpenXml;
 using solar.generics.Providers;
 using solar.irepo;
+using solar.iservices;
 using solar.models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace solar.services
 {
-    public class ExcelService
+    public class ExcelService: IExcelService
     {
         readonly IServicesProvider<ICategoryRepo> _categoryRepo;
         readonly IHttpContextAccessor _accessor;
