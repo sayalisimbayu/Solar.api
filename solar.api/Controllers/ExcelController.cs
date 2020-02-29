@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using solar.api.Providers;
+using solar.generics.Providers;
 using solar.irepo;
 using solar.iservice;
 using solar.models;
