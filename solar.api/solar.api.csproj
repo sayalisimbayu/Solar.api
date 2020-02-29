@@ -25,4 +25,8 @@
     <ProjectReference Include="..\solar.services\solar.services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploadedFiles\" />
+  </ItemGroup>
+
 </Project>
