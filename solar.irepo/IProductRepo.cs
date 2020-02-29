@@ -12,6 +12,6 @@ namespace solar.irepo
         Products getById(int id);
         bool save(Products data);
         bool delete(int id);
-        Tuple<IList<Products>, int> getByPage(int start, int number, string searchs, string orderby);
+        Tuple<IList<Products>, int> getByPage(Paged page);
     }
 }

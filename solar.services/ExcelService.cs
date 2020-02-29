@@ -2,7 +2,7 @@
 using OfficeOpenXml;
 using solar.generics.Providers;
 using solar.irepo;
-using solar.iservices;
+using solar.iservice;
 using solar.models;
 using System;
 using System.Collections.Generic;
@@ -48,11 +48,9 @@ namespace solar.services
 
                 //_db.Customers.AddRange(customerList);
                 //_db.SaveChanges();
-
-                //return customerList;
+                feedback.data = categoryList;
+                return feedback;
             }
-
-            return feedback;
 
         }
     }

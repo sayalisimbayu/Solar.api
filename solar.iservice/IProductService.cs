@@ -13,6 +13,6 @@ namespace solar.iservices
         Feedback getCategories(string tenant, int id);
         Feedback save(string tenant, Products data);
         Feedback delete(string tenant, int id, int notificationId);
-        Feedback getPage(string tenant, int start, int number, string searchs, string orderby);
+        Feedback getPage(string tenant, Paged page);
     }
 }

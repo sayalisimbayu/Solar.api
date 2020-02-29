@@ -81,15 +81,15 @@ namespace solar.repo
                 throw ex;
             }
         }
-        public Tuple<IList<Products>, int> getByPage(int start, int number, string searchs, string orderby)
+        public Tuple<IList<Products>, int> getByPage(Paged page)
         {
             try
             {
                 SqlCommand command = new SqlCommand(String.Format("SELECT * FROM {4} {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4} WHERE ISDELETED=0",
-                    start*number,
-                    number,
-                    !String.IsNullOrEmpty(searchs) ? String.Format("WHERE {0}  AND ISDELETED=0 ", searchs) : " WHERE ISDELETED=0 ",
-                    (!String.IsNullOrEmpty(orderby) ? String.Format("ORDER BY {0}", orderby) : "ORDER BY ID"), tableName));
+                    page.pageNumber* page.pageSize,
+                    page.pageSize,
+                    !String.IsNullOrEmpty(page.search) ? String.Format("WHERE {0}  AND ISDELETED=0 ", page.search) : " WHERE ISDELETED=0 ",
+                    (!String.IsNullOrEmpty(page.orderby) ? String.Format("ORDER BY {0}", page.orderby) : "ORDER BY ID"), tableName));
 
                 DataSet productData = command.ExecuteDataSet();
                 if (productData.Tables[0].Rows.Count == 0)

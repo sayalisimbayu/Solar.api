@@ -42,10 +42,10 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _productProvider.GetInstance(tenant).delete(tenant, id, notificationId);
         }
-        [HttpGet("{start}/{number}/Page")]
-        public Feedback GetPage(int start, int number, string searchs = "", string orderby = "", string tenant = "")
+        [HttpPost("Page")]
+        public Feedback GetPage(Paged page, string tenant = "")
         {
-            return _productProvider.GetInstance(tenant).getPage(tenant, start, number, searchs, orderby);
+            return _productProvider.GetInstance(tenant).getPage(tenant, page);
         }
     }
 }
