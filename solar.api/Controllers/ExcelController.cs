@@ -23,7 +23,7 @@ namespace solar.api.Controllers
         }
 
         [HttpPost]
-        public Feedback ImportExcel(string fileName, string tenant = "")
+        public Feedback ImportExcel(ImportExcel fileName, string tenant = "")
         {
             return _importExcelProvider.GetInstance(tenant).ImportCategoryExcel(tenant, fileName);
         }

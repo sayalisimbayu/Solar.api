@@ -8,6 +8,6 @@ namespace solar.iservice
 {
     public interface IExcelService
     {
-        Feedback ImportCategoryExcel(string tenant, string fileName);
+        Feedback ImportCategoryExcel(string tenant, ImportExcel fileName);
     }
 }
