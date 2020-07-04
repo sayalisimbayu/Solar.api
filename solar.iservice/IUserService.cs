@@ -12,12 +12,13 @@ namespace solar.iservices
         Task<Feedback> getName(string tenant, int id);
         Task<Feedback> getById(string tenant, int id);
         Task<Feedback> getUserInfoById(string tenant, int id);
+        Task<Feedback> getUserInfoByUserId(string tenant, int id);
         Task<Feedback> getUserSettingsById(string tenant, int id);
         Task<Feedback> save(string tenant, AppUser data);
         Task<Feedback> save(string tenant, List<AppPermission> data);
         Task<Feedback> delete(string tenant, int id, int notificationId);
         Feedback saveUser(string tenant, AppUserInfo data);
-        Task<Feedback> getPage(string tenant, int start, int number, string searchs, string orderby);
+        Task<Feedback> getPage(string tenant, Paged page);
         Task<Feedback> getPermissions(string tenant, string username);
         Task<Feedback> getPermissionsById(string tenant, int id);
         Task<Boolean> validateUser(string tenant, AuthModel auth);

@@ -53,7 +53,25 @@ namespace solar.repo
         {
             try
             {
-                SqlCommand command = new SqlCommand("SELECT * FROM APPUSERINFO WHERE ID=@ID");
+                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.USERNAME AS EMAIL FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID WHERE A.ID=@ID", tableName));
+                command.Parameters.AddWithValue("@ID", id);
+                DataTable userData = DBServer.ExecuteDataTable(command);
+                if (userData.Rows.Count == 0)
+                {
+                    return null;
+                }
+                return userData.Rows[0].Convert<AppUserInfo>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public AppUserInfo getUserInfoByUserId(int id)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.DisplayName,B.USERNAME AS EMAIL FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID WHERE A.USID=@ID", tableName));
                 command.Parameters.AddWithValue("@ID", id);
                 DataTable userData = DBServer.ExecuteDataTable(command);
                 if (userData.Rows.Count == 0)
@@ -105,15 +123,15 @@ namespace solar.repo
             }
         }
 
-        public Tuple<IList<AppUser>, int> getByPage(int start, int number, string searchs, string orderby)
+        public Tuple<IList<AppUser>, int> getByPage(Paged page)
         {
             try
             {
-                SqlCommand command = new SqlCommand(String.Format("SELECT * FROM {4} {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4}",
-                    start * number,
-                    number,
-                    !String.IsNullOrEmpty(searchs) ? String.Format("WHERE {0}  AND ISDELETED=0", searchs) : " WHERE ISDELETED=0 ",
-                    (!String.IsNullOrEmpty(orderby) ? String.Format("ORDER BY {0}", orderby) : "ORDER BY ID"), tableName));
+                SqlCommand command = new SqlCommand(String.Format("SELECT * FROM {4} {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4} {2}",
+                    page.pageNumber * page.pageSize,
+                    page.pageSize,
+                    !String.IsNullOrEmpty(page.search) ? String.Format("WHERE {0}  AND ISDELETED=0", page.search) : " WHERE ISDELETED=0 ",
+                    (!String.IsNullOrEmpty(page.orderby) ? String.Format("ORDER BY {0}", page.orderby) : "ORDER BY ID"), tableName));
 
                 DataSet userData = command.ExecuteDataSet();
                 if (userData.Tables[0].Rows.Count == 0)

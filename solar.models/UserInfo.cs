@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +8,10 @@ namespace solar.models
     {
         public int ID { get; set; }
         public int USID { get; set; }
+        [NoBind]
+        public string DISPLAYNAME { get; set; }
+        [NoBind]
+        public string EMAIL { get; set; }
         public string FIRSTNAME { get; set; }
         public string LASTNAME { get; set; }
         public bool GENDER { get; set; }

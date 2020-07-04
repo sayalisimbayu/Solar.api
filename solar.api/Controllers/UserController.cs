@@ -33,6 +33,11 @@ namespace solar.api.Controllers.api.Controllers
         {
             return await _userProvider.GetInstance(tenant).getUserInfoById(tenant, id);
         }
+        [HttpGet("{id}/InfoByUser"), Authorize]
+        public async Task<Feedback> UserInfoUserId(int id, string tenant = "")
+        {
+            return await _userProvider.GetInstance(tenant).getUserInfoByUserId(tenant, id);
+        }
         [HttpGet("{id}/UserSetting"), Authorize]
         public async Task<Feedback> UserSetting(int id, string tenant = "")
         {
@@ -48,20 +53,20 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _userProvider.GetInstance(tenant).saveUser(tenant, data);
         }
-        [HttpPost("Permission"), Authorize]
-        public async Task<Feedback> SavePermission(AppUser data, string tenant = "")
+        [HttpPost("Permissions"), Authorize]
+        public async Task<Feedback> SavePermission(AppPermission[] data, string tenant = "")
         {
-            return await _userProvider.GetInstance(tenant).save(tenant, data.permissions.ToList());
+            return await _userProvider.GetInstance(tenant).save(tenant, data.ToList());
         }
         [HttpGet("{id}/{notificationId}/Delete"), Authorize]
         public async Task<Feedback> Delete(int id, int notificationId, string tenant = "")
         {
             return await _userProvider.GetInstance(tenant).delete(tenant, id, notificationId);
         }
-        [HttpGet("{start}/{number}/Page"), Authorize]
-        public async Task<Feedback> GetPage(int start, int number, string searchs = "", string orderby = "", string tenant = "")
+        [HttpPost("Page"), Authorize]
+        public async Task<Feedback> GetPage(Paged page, string tenant = "")
         {
-            return await _userProvider.GetInstance(tenant).getPage(tenant, start, number, searchs, orderby);
+            return await _userProvider.GetInstance(tenant).getPage(tenant, page);
         }
 
         [HttpGet("{username}/Permissions")]

@@ -212,6 +212,44 @@ namespace solar.services
             }
             return feedback;
         }
+        public async Task<Feedback> getUserInfoByUserId(string tenant, int id)
+        {
+            Feedback feedback = new Feedback();
+            try
+            {
+                var _userData = _userRepo.GetInstance(tenant).getUserInfoByUserId(id);
+                if (_userData != null)
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 1,
+                        Message = "Data fetched sucessfully",
+                        data = _userData
+                    };
+                }
+                else
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 0,
+                        Message = "Record not found",
+                        data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+
+                feedback = new Feedback
+                {
+                    Code = 0,
+                    Message = "Got the error while removing data",
+                    data = ex
+                };
+                GitHub.createIssue(ex, new { id = id, tenant = tenant }, _accessor.HttpContext.Request.Headers);
+            }
+            return feedback;
+        }
         public async Task<Feedback> getUserSettingsById(string tenant, int id)
         {
             Feedback feedback = new Feedback();
@@ -250,12 +288,12 @@ namespace solar.services
             }
             return feedback;
         }
-        public async Task<Feedback> getPage(string tenant, int start, int number, string searchs, string orderby)
+        public async Task<Feedback> getPage(string tenant, Paged page)
         {
             Feedback feedback = new Feedback();
             try
             {
-                var userList = _userRepo.GetInstance(tenant).getByPage(start, number, searchs, orderby);
+                var userList = _userRepo.GetInstance(tenant).getByPage(page);
                 if (userList != null)
                 {
                     feedback = new Feedback
@@ -283,7 +321,7 @@ namespace solar.services
                     Message = "Got the error while removing data",
                     data = ex
                 };
-                GitHub.createIssue(ex, new { tenant = tenant, start = start, number = number, searchs = searchs, orderby = orderby }, _accessor.HttpContext.Request.Headers);
+                GitHub.createIssue(ex, new { tenant = tenant, page = page }, _accessor.HttpContext.Request.Headers);
             }
             return feedback;
         }
