@@ -90,5 +90,10 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _userProvider.GetInstance(tenant).getConfigById(tenant, id);
         }
+        [HttpPost("profileImage"), Authorize]
+        public async Task<Feedback> SaveProfileImage([FromBody]UserProfileImage Image, string tenant = "")
+        {
+            return await _userProvider.GetInstance(tenant).SaveProfileImage(tenant, Image);
+        }
     }
 }

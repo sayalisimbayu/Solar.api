@@ -53,7 +53,7 @@ namespace solar.repo
         {
             try
             {
-                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.USERNAME AS EMAIL FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID WHERE A.ID=@ID", tableName));
+                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.USERNAME AS EMAIL , B.PROFILEIMG FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID WHERE A.ID=@ID", tableName));
                 command.Parameters.AddWithValue("@ID", id);
                 DataTable userData = DBServer.ExecuteDataTable(command);
                 if (userData.Rows.Count == 0)
@@ -242,6 +242,26 @@ namespace solar.repo
                     return null;
                 }
                 return userData.Rows[0].Convert<AppUserAddOnConfig>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public AppUser SaveProfileImage(UserProfileImage Image)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand(String.Format("UPDATE {0} SET PROFILEIMG=@Image WHERE ID =@ID; SELECT * FROM APPUSER WHERE ID=@ID", tableName));
+                command.Parameters.AddWithValue("@ID", Image.ID);
+                command.Parameters.AddWithValue("@Image", Image.PROFILEIMG);
+                DataTable userData = DBServer.ExecuteDataTable(command);
+                if (userData.Rows.Count == 0)
+                {
+                    return null;
+                }
+                return userData.Rows[0].Convert<AppUser>();
             }
             catch (Exception ex)
             {

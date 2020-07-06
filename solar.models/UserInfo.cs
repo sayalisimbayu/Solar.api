@@ -23,5 +23,12 @@ namespace solar.models
         public string CITY { get; set; }
         public string USTATE { get; set; }
         public string COUNTRYCODE { get; set; }
+        public string PROFILEIMG { get; set; }
+    }
+
+    public class UserProfileImage
+    {
+        public int ID { get; set; }
+        public string PROFILEIMG { get; set; }
     }
 }

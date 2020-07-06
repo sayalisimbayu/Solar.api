@@ -26,5 +26,6 @@ namespace solar.iservices
         Task<Feedback> reset(string tenant, ResetModel reset);
         Feedback saveAppUserAddOnConfig(string tenant, AppUserAddOnConfig data);
         Feedback getConfigById(string tenant, int id);
+        Task<Feedback> SaveProfileImage(string tenant, UserProfileImage Image);
     }
 }
