@@ -16,5 +16,7 @@ namespace solar.models
         public string alias { get; set; }
         [NoBind]
         public string value { get; set; }
+        [NoBind]
+        public string description { get; set; }
     }
 }

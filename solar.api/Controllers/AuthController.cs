@@ -36,7 +36,7 @@ namespace solar.api.Controllers
             {
                 return BadRequest("Invalid client request");
             }
-            if ((auth.email == "amar@simbayu.in" && auth.password == "amar123") ||  (_userProvider.GetInstance("")).validateUser("", auth).Result)
+            if ((auth.email == "aayu@simbayu.in" && auth.password == "amar123") ||  (_userProvider.GetInstance("")).validateUser("", auth).Result)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SystemConstants.JWT));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
