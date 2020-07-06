@@ -22,6 +22,7 @@ namespace solar.irepo
         AppUserAddOnConfig getConfigById(int id);
         bool saveAppUserAddOnConfig(ref AppUserAddOnConfig data, SqlTransaction transaction);
         Tuple<IList<AppUser>, int> getByPage(Paged page);
+        AppUser SaveProfileImage(UserProfileImage Image);
 
     }
 }

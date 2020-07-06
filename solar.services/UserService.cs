@@ -862,5 +862,55 @@ namespace solar.services
             }
             return feedback;
         }
+
+        public async Task<Feedback> SaveProfileImage(string tenant, UserProfileImage Image)
+        {
+            Feedback feedback = new Feedback();
+            try
+            {
+                if (Image.ID != 0)
+                {
+                    var userList = _userRepo.GetInstance(tenant).SaveProfileImage(Image);
+                    if (userList != null)
+                    {
+                        feedback = new Feedback
+                        {
+                            Code = 1,
+                            Message = "Data Saved sucessfully",
+                            data = userList
+                        };
+                    }
+                    else
+                    {
+                        feedback = new Feedback
+                        {
+                            Code = 0,
+                            Message = "Something Went Wrong",
+                            data = null
+                        };
+                    }
+                } else
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 0,
+                        Message = "We cant find you",
+                        data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                feedback = new Feedback
+                {
+                    Code = 0,
+                    Message = "Got the error while saving data",
+                    data = ex
+                };
+                GitHub.createIssue(ex, new { tenant = tenant, page = Image }, _accessor.HttpContext.Request.Headers);
+            }
+            return feedback;
+        }
     }
+
 }
