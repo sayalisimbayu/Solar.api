@@ -357,7 +357,7 @@ namespace solar.services
             try
             {
                 AppUser _userData;
-                if (username == "amar@simbayu.in")
+                if (username == "aayu@simbayu.in")
                 {
                     _userData = new AppUser()
                     {
