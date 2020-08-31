@@ -15,5 +15,7 @@ namespace solar.models
         public DateTime createdDate { get; set; }
         public DateTime updatedDate { get; set; }
         public int userId { get; set; }
+        public int recordId { get; set; }
+        public string ntype { get; set; }
     }
 }

@@ -480,6 +480,7 @@ namespace solar.services
                                     transaction.Commit();
                                     notification.progress = 1;
                                     notification.message = "Data saved sucessfully for User: " + data.displayname;
+                                    notification.recordId = data.id;
                                     _notificationRepo.GetInstance(tenant).save(ref notification);
                                     _hubContext.Clients.All.SendAsync("SendNotification", notification);
                                     feedback = new Feedback
@@ -495,6 +496,7 @@ namespace solar.services
                                 transaction.Commit();
                                 notification.progress = 1;
                                 notification.message = "Data saved sucessfully";
+                                notification.recordId = data.id;
                                 _notificationRepo.GetInstance(tenant).save(ref notification);
                                 _hubContext.Clients.All.SendAsync("SendNotification", notification);
                                 feedback = new Feedback
@@ -610,6 +612,7 @@ namespace solar.services
                             transaction.Commit();
                             notification.progress = 1;
                             notification.message = "Data saved sucessfully";
+                            notification.recordId = data[0].appuserid;
                             _notificationRepo.GetInstance(tenant).save(ref notification);
                             _hubContext.Clients.All.SendAsync("SendNotification", notification);
                             feedback = new Feedback
@@ -625,13 +628,13 @@ namespace solar.services
                 catch (Exception ex)
                 {
                     notification.progress = -1;
-                    notification.message = "Got the error while removing data";
+                    notification.message = "Got the error while saving data";
                     _notificationRepo.GetInstance(tenant).save(ref notification);
                     _hubContext.Clients.All.SendAsync("SendNotification", notification);
                     feedback = new Feedback
                     {
                         Code = 0,
-                        Message = "Got the error while removing data",
+                        Message = "Got the error while saving data",
                         data = ex
                     };
                     GitHub.createIssue(ex, new { tenant = tenant, data = data }, _accessor.HttpContext.Request.Headers);
@@ -692,7 +695,7 @@ namespace solar.services
                     feedback = new Feedback
                     {
                         Code = 0,
-                        Message = "Got the error while removing data",
+                        Message = "Got the error while sending reset password email",
                         data = ex
                     };
                     GitHub.createIssue(ex, new { tenant = tenant, data = email }, _accessor.HttpContext.Request.Headers);
@@ -758,7 +761,7 @@ namespace solar.services
                     feedback = new Feedback
                     {
                         Code = 0,
-                        Message = "Got the error while removing data",
+                        Message = "Got the error while sending reset password email",
                         data = ex
                     };
                     GitHub.createIssue(ex, new { tenant = tenant, data = reset.email }, _accessor.HttpContext.Request.Headers);

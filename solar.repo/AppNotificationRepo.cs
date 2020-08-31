@@ -94,6 +94,12 @@ namespace solar.repo
                 {
                     throw new Exception("Null notification not allowed.");
                 }
+                if (String.IsNullOrEmpty(data.ntype)) {
+                    data.ntype = "user";
+                }
+                if (data.userId == 0) { 
+                    
+                }
                 data.updatedDate = DateTime.Now;
                 if (data.id == 0)
                 {
