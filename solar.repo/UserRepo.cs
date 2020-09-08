@@ -143,6 +143,26 @@ namespace solar.repo
                 throw ex;
             }
         }
+        public Tuple<IList<AppUserMin>, int> getMinifiedByPage(Paged page)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand(String.Format("SELECT * FROM {4} {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4} {2}",
+                    page.pageNumber * page.pageSize,
+                    page.pageSize,
+                    !String.IsNullOrEmpty(page.search) ? String.Format("WHERE {0}  AND ISDELETED=0", page.search) : " WHERE ISDELETED=0 ",
+                    (!String.IsNullOrEmpty(page.orderby) ? String.Format("ORDER BY {0}", page.orderby) : "ORDER BY ID"), tableName));
+
+                DataSet userData = command.ExecuteDataSet();
+                if (userData.Tables[0].Rows.Count == 0)
+                    return null;
+                return new Tuple<IList<AppUserMin>, int>(userData.Tables[0].ConvertList<AppUserMin>(), Convert.ToInt32(userData.Tables[1].Rows[0]["TotalRecords"]));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public string getName(int id)
         {

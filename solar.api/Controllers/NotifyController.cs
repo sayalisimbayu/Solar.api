@@ -20,5 +20,10 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _notifyProvider.GetInstance(tenant).save(tenant, data);
         }
+        [HttpPost("page")]
+        public Feedback Page(Paged page, string tenant = "")
+        {
+            return _notifyProvider.GetInstance(tenant).getPage(tenant, page);
+        }
     }
 }

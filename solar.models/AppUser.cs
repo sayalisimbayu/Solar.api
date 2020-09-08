@@ -16,4 +16,12 @@ namespace solar.models
         [NoBind]
         public AppPermission[] permissions { get; set; }
     }
+
+    public class AppUserMin : Base
+    {
+        public int id { get; set; }
+        public string username { get; set; }
+        public string displayname { get; set; }
+        public string profileimg { get; set; }
+    }
 }

@@ -47,15 +47,15 @@ namespace solar.repo
             }
         }
 
-        public Tuple<IList<AppNotification>, int> getByPage(int start, int number, string searchs, string orderby)
+        public Tuple<IList<AppNotification>, int> getByPage(Paged page)
         {
             try
             {
                 SqlCommand command = new SqlCommand(String.Format("SELECT * FROM {4} {2} {3} OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY;SELECT COUNT(ID) TotalRecords FROM {4}",
-                    start,
-                    number,
-                    !String.IsNullOrEmpty(searchs) ? String.Format("WHERE {0}", searchs) : "",
-                    (!String.IsNullOrEmpty(orderby) ? String.Format("ORDER BY {0}", orderby) : "ORDER BY ID"), tableName));
+                    page.pageNumber * page.pageSize,
+                    page.pageSize,
+                    !String.IsNullOrEmpty(page.search) ? String.Format("WHERE {0}", page.search) : "",
+                    (!String.IsNullOrEmpty(page.orderby) ? String.Format("ORDER BY {0}", page.orderby) : "ORDER BY ID"), tableName));
 
                 DataSet notificationData = command.ExecuteDataSet();
                 if (notificationData.Tables[0].Rows.Count == 0)

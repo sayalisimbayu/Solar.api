@@ -68,7 +68,11 @@ namespace solar.api.Controllers.api.Controllers
         {
             return await _userProvider.GetInstance(tenant).getPage(tenant, page);
         }
-
+        [HttpPost("MinifiedPage"), Authorize]
+        public async Task<Feedback> GetMinifiedPage(Paged page, string tenant = "")
+        {
+            return await _userProvider.GetInstance(tenant).getMinifiedPage(tenant, page);
+        }
         [HttpGet("{username}/Permissions")]
         public async Task<Feedback> GetPermissions(string username, string tenant = "")
         {

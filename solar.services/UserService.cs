@@ -325,6 +325,43 @@ namespace solar.services
             }
             return feedback;
         }
+        public async Task<Feedback> getMinifiedPage(string tenant, Paged page)
+        {
+            Feedback feedback = new Feedback();
+            try
+            {
+                var userList = _userRepo.GetInstance(tenant).getByPage(page);
+                if (userList != null)
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 1,
+                        Message = "Data fetched sucessfully",
+                        data = userList
+                    };
+                }
+                else
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 0,
+                        Message = "Record not found",
+                        data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                feedback = new Feedback
+                {
+                    Code = 0,
+                    Message = "Got the error while removing data",
+                    data = ex
+                };
+                GitHub.createIssue(ex, new { tenant = tenant, page = page }, _accessor.HttpContext.Request.Headers);
+            }
+            return feedback;
+        }
 
         public async Task<Boolean> validateUser(string tenant, AuthModel auth)
         {

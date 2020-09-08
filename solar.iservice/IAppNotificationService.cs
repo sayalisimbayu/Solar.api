@@ -9,6 +9,6 @@ namespace solar.iservices
     {
         Feedback save(string tenant, AppNotification data);
         Feedback getById(string tenant, int id);
-        Feedback getPage(string tenant, int start, int number, string searchs, string orderby);
+        Feedback getPage(string tenant, Paged page);
     }
 }

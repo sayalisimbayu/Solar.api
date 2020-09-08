@@ -19,6 +19,7 @@ namespace solar.iservices
         Task<Feedback> delete(string tenant, int id, int notificationId);
         Feedback saveUser(string tenant, AppUserInfo data);
         Task<Feedback> getPage(string tenant, Paged page);
+        Task<Feedback> getMinifiedPage(string tenant, Paged page);
         Task<Feedback> getPermissions(string tenant, string username);
         Task<Feedback> getPermissionsById(string tenant, int id);
         Task<Boolean> validateUser(string tenant, AuthModel auth);
