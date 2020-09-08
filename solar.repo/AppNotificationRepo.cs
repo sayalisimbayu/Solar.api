@@ -60,7 +60,7 @@ namespace solar.repo
                 DataSet notificationData = command.ExecuteDataSet();
                 if (notificationData.Tables[0].Rows.Count == 0)
                     return null;
-                return new Tuple<IList<AppNotification>, int>(notificationData.Tables[0].ConvertList<AppNotification>(), Convert.ToInt32(notificationData.Tables[0].Rows[0]["TotalRecords"]));
+                return new Tuple<IList<AppNotification>, int>(notificationData.Tables[0].ConvertList<AppNotification>(), Convert.ToInt32(notificationData.Tables[1].Rows[0][0]));
             }
             catch (Exception ex)
             {
@@ -97,8 +97,8 @@ namespace solar.repo
                 if (String.IsNullOrEmpty(data.ntype)) {
                     data.ntype = "user";
                 }
-                if (data.userId == 0) { 
-                    
+                if (data.userId == 0) {
+
                 }
                 data.updatedDate = DateTime.Now;
                 if (data.id == 0)
