@@ -106,7 +106,7 @@ namespace solar.api
             app.UseHttpsRedirection();
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:4600")
+                builder.WithOrigins("http://localhost:4600","https://dev.simbayu.in")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();
