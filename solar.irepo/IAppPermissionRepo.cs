@@ -10,7 +10,7 @@ namespace solar.irepo
     {
         string getName(int id);
         List<AppPermission> getAllDefaultPermissions();
-        List<AppPermission> getByUserId(int id);
+        List<AppPermission> getByUserId(int id, bool active = false);
         AppPermission getById(int id);
         bool save(AppPermission data);
         bool save(List<AppPermission> data, SqlTransaction transaction);

@@ -45,7 +45,7 @@ namespace solar.api.Controllers.api.Controllers
         }
         [HttpPost("Save")]
         public async Task<Feedback> Save(AppUser data, string tenant = "")
-            {
+        {
             return await _userProvider.GetInstance(tenant).save(tenant, data);
         }
         [HttpPost("SaveUserInfo")]
@@ -79,10 +79,10 @@ namespace solar.api.Controllers.api.Controllers
             return await _userProvider.GetInstance(tenant).getPermissions(tenant, username);
         }
 
-        [HttpGet("{id}/PermissionsById")]
-        public async Task<Feedback> GetPermissionsById(int id, string tenant = "")
+        [HttpGet("{id}/PermissionsById/{active}")]
+        public async Task<Feedback> GetPermissionsById(int id, int active = 1, string tenant = "")
         {
-            return await _userProvider.GetInstance(tenant).getPermissionsById(tenant, id);
+            return await _userProvider.GetInstance(tenant).getPermissionsById(tenant, id, active);
         }
         [HttpPost("saveAppUserAddOnConfig")]
         public Feedback saveAppUserAddOnConfig(AppUserAddOnConfig data, string tenant = "")
@@ -95,7 +95,7 @@ namespace solar.api.Controllers.api.Controllers
             return _userProvider.GetInstance(tenant).getConfigById(tenant, id);
         }
         [HttpPost("profileImage"), Authorize]
-        public async Task<Feedback> SaveProfileImage([FromBody]UserProfileImage Image, string tenant = "")
+        public async Task<Feedback> SaveProfileImage([FromBody] UserProfileImage Image, string tenant = "")
         {
             return await _userProvider.GetInstance(tenant).SaveProfileImage(tenant, Image);
         }

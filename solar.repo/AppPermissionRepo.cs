@@ -49,7 +49,7 @@ namespace solar.repo
             }
         }
 
-        public List<AppPermission> getByUserId(int id)
+        public List<AppPermission> getByUserId(int id,bool active=false)
         {
             try
             {

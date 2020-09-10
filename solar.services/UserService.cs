@@ -451,13 +451,13 @@ namespace solar.services
             return feedback;
         }
 
-        public async Task<Feedback> getPermissionsById(string tenant, int id)
+        public async Task<Feedback> getPermissionsById(string tenant, int id, int active)
         {
             Feedback feedback;
             try
             {
 
-                var permissions = _permissionRepo.GetInstance(tenant).getByUserId(id).ToArray();
+                var permissions = _permissionRepo.GetInstance(tenant).getByUserId(id, (active == 1 ? true : false)).ToArray();
                 feedback = new Feedback
                 {
                     Code = 1,
@@ -929,7 +929,8 @@ namespace solar.services
                             data = null
                         };
                     }
-                } else
+                }
+                else
                 {
                     feedback = new Feedback
                     {
