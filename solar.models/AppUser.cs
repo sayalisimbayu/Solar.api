@@ -15,6 +15,8 @@ namespace solar.models
         public string profileimg { get; set; }
         [NoBind]
         public AppPermission[] permissions { get; set; }
+        [NoBind]
+        public AppUserAddOnConfig addOnConfig { get; set; }
     }
 
     public class AppUserMin : Base

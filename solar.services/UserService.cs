@@ -416,6 +416,7 @@ namespace solar.services
                     _userData = _userRepo.GetInstance(tenant).getByUserName(username);
                     if (_userData != null)
                     {
+                        _userData.addOnConfig = _userRepo.GetInstance(tenant).getConfigById(_userData.id);
                         _userData.permissions = _permissionRepo.GetInstance(tenant).getByUserId(_userData.id).ToArray();
                         feedback = new Feedback
                         {
@@ -949,6 +950,55 @@ namespace solar.services
                     data = ex
                 };
                 GitHub.createIssue(ex, new { tenant = tenant, page = Image }, _accessor.HttpContext.Request.Headers);
+            }
+            return feedback;
+        }
+
+        public async Task<Feedback> setThemeForUser(string tenant, AppUserTheme data) {
+            Feedback feedback = new Feedback();
+            try
+            {
+                if (data.USID != 0)
+                {
+                    var response = await _permissionRepo.GetInstance(tenant).setThemeForUser(data);
+                    if (response)
+                    {
+                        feedback = new Feedback
+                        {
+                            Code = 1,
+                            Message = "Data Saved sucessfully",
+                            data = response
+                        };
+                    }
+                    else
+                    {
+                        feedback = new Feedback
+                        {
+                            Code = 0,
+                            Message = "Something Went Wrong",
+                            data = null
+                        };
+                    }
+                }
+                else
+                {
+                    feedback = new Feedback
+                    {
+                        Code = 0,
+                        Message = "We cant find you",
+                        data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                feedback = new Feedback
+                {
+                    Code = 0,
+                    Message = "Got the error while saving data",
+                    data = ex
+                };
+                GitHub.createIssue(ex, new { tenant = tenant, data = data }, _accessor.HttpContext.Request.Headers);
             }
             return feedback;
         }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace solar.repo
 {
@@ -201,6 +202,33 @@ namespace solar.repo
                 if (permissionData.Tables[0].Rows.Count == 0)
                     return null;
                 return new Tuple<IList<AppPermission>, int>(permissionData.Tables[0].ConvertList<AppPermission>(), Convert.ToInt32(permissionData.Tables[0].Rows[0]["TotalRecords"]));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> setThemeForUser(AppUserTheme appUserTheme) {
+            try
+            {
+                SqlCommand command = new SqlCommand(String.Format(@"
+                     BEGIN 
+                     IF NOT EXISTS (SELECT USID FROM APPUSERADDONCONFIG WHERE USID=@ID)
+                     BEGIN
+                     INSERT INTO APPUSERADDONCONFIG (USID,THEME,SKIN) VALUES (@ID,@THEME,@SKIN);
+                     END
+                     ELSE
+                     BEGIN
+                     UPDATE APPUSERADDONCONFIG SET THEME=@THEME,SKIN=@SKIN WHERE USID=@ID
+                     END
+                     END
+                ", tableName));
+                command.Parameters.AddWithValue("@ID", appUserTheme.USID);
+                command.Parameters.AddWithValue("@THEME", appUserTheme.THEME);
+                command.Parameters.AddWithValue("@SKIN", appUserTheme.SKIN);
+                DBServer.ExecuteNon(command);
+                return true;
             }
             catch (Exception ex)
             {

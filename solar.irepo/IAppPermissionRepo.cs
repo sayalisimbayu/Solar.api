@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace solar.irepo
 {
@@ -17,5 +18,6 @@ namespace solar.irepo
         bool deleteByUserId(int id);
         bool delete(int id);
         Tuple<IList<AppPermission>, int> getByPage(int start, int number, string searchs, string orderby);
+        Task<bool> setThemeForUser(AppUserTheme appUserTheme);
     }
 }

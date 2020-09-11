@@ -89,6 +89,11 @@ namespace solar.api.Controllers.api.Controllers
         {
             return _userProvider.GetInstance(tenant).saveAppUserAddOnConfig(tenant, data);
         }
+        [HttpPost("setThemeForUser")]
+        public async Task<Feedback> setThemeForUser(AppUserTheme appUserTheme, string tenant = "")
+        {
+            return await _userProvider.GetInstance(tenant).setThemeForUser(tenant, appUserTheme);
+        }
         [HttpGet("{id}/Config")]
         public Feedback getConfig(int id, string tenant = "")
         {

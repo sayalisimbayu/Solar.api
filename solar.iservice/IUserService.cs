@@ -28,5 +28,6 @@ namespace solar.iservices
         Feedback saveAppUserAddOnConfig(string tenant, AppUserAddOnConfig data);
         Feedback getConfigById(string tenant, int id);
         Task<Feedback> SaveProfileImage(string tenant, UserProfileImage Image);
+        Task<Feedback> setThemeForUser(string tenant, AppUserTheme data);
     }
 }

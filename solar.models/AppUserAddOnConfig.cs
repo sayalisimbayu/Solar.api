@@ -12,5 +12,13 @@ namespace solar.models
         public string TIMEZONE { get; set; }
         public string DATEFORMAT { get; set; }
         public string LUCIDNOTIFICATION { get; set; }
+        public string THEME { get; set; }
+        public string SKIN { get; set; }
+    }
+
+    public class AppUserTheme { 
+        public int USID { get; set; }
+        public string THEME { get; set; }
+        public string SKIN { get; set; }
     }
 }
