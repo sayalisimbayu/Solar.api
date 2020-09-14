@@ -25,6 +25,11 @@ using solar.irepo.Extensions;
 using solar.iservices;
 using solar.iservices.Extensions;
 using solar.messaging.Model;
+using static Microsoft.OpenApi.Models.OpenApiInfo;
+using Microsoft.OpenApi.Models;
+using Octokit;
+
+//using Swashbuckle.Swagger;
 
 namespace solar.api
 {
@@ -87,7 +92,21 @@ namespace solar.api
             //services.AddScopedDynamic<IProductService>(TypesToRegister);
             // Global Service provider
             services.AddScoped(typeof(IServicesProvider<>), typeof(ServicesProvider<>));
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0", new OpenApiInfo
+                {
+                    Title = "My Demo API",
+                    Version = "1.0",
+                    Description = "",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Developer Team",
+                        Email = "amar@simbayu.in",
+                        Url = new Uri("https://localhost:44308/swagger/index.html"),
+                    }
+                });
+            });
 
         }
 
@@ -110,6 +129,11 @@ namespace solar.api
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "My Demo API (V 1.0)");
             });
             app.UseCors("CorsPolicy");
             app.UseMvc();
