@@ -764,7 +764,7 @@ namespace solar.services
                 try
                 {
                     var _userData = _userRepo.GetInstance(tenant).getByUserName(reset.email);
-                    if (reset.otp == _userData.otp)
+                    if (reset.otp.ToString() == _userData.otp)
                     {
                         if (_userData != null)
                         {

@@ -49,12 +49,12 @@ namespace solar.api.Controllers.api.Controllers
             return await _userProvider.GetInstance(tenant).save(tenant, data);
         }
         [HttpPost("SaveUserInfo")]
-        public Feedback SaveUser(AppUserInfo data, string tenant = "")
+        public Feedback SaveUser([FromBody]AppUserInfo data, string tenant = "")
         {
             return _userProvider.GetInstance(tenant).saveUser(tenant, data);
         }
         [HttpPost("Permissions"), Authorize]
-        public async Task<Feedback> SavePermission(AppPermission[] data, string tenant = "")
+        public async Task<Feedback> SavePermission([FromBody]AppPermission[] data, string tenant = "")
         {
             return await _userProvider.GetInstance(tenant).save(tenant, data.ToList());
         }
@@ -64,7 +64,7 @@ namespace solar.api.Controllers.api.Controllers
             return await _userProvider.GetInstance(tenant).delete(tenant, id, notificationId);
         }
         [HttpPost("Page"), Authorize]
-        public async Task<Feedback> GetPage(Paged page, string tenant = "")
+        public async Task<Feedback> GetPage([FromBody]Paged page, string tenant = "")
         {
             return await _userProvider.GetInstance(tenant).getPage(tenant, page);
         }
