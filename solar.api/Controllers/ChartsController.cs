@@ -17,7 +17,7 @@ namespace solar.api.Controllers.api.Controllers
         {
             _hub = hub;
         }
-
+        [HttpGet]
         public IActionResult Get()
         {
             var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferchartdata", DataManager.GetData()));
