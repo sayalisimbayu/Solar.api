@@ -14,9 +14,10 @@ namespace solar.models
         public string LUCIDNOTIFICATION { get; set; }
         public string THEME { get; set; }
         public string SKIN { get; set; }
+        public string SOCIALLIST { get; set; }
     }
 
-    public class AppUserTheme { 
+    public class AppUserTheme {
         public int USID { get; set; }
         public string THEME { get; set; }
         public string SKIN { get; set; }

@@ -53,7 +53,7 @@ namespace solar.repo
         {
             try
             {
-                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.USERNAME AS EMAIL , B.PROFILEIMG FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID WHERE A.ID=@ID", tableName));
+                SqlCommand command = new SqlCommand(String.Format("SELECT A.*,B.USERNAME AS EMAIL , B.PROFILEIMG, C.SOCIALLIST FROM APPUSERINFO A LEFT JOIN {0} B ON A.USID=B.ID LEFT JOIN APPUSERADDONCONFIG C ON C.USID = B.ID WHERE A.ID=@ID", tableName));
                 command.Parameters.AddWithValue("@ID", id);
                 DataTable userData = DBServer.ExecuteDataTable(command);
                 if (userData.Rows.Count == 0)

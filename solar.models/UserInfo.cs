@@ -24,6 +24,7 @@ namespace solar.models
         public string USTATE { get; set; }
         public string COUNTRYCODE { get; set; }
         public string PROFILEIMG { get; set; }
+        public string SOCIALLIST { get; set; }
     }
 
     public class UserProfileImage
