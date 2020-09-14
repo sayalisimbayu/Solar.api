@@ -6,6 +6,11 @@
     <UserSecretsId>f6c1ac50-cbf9-42fa-af99-3a260ce9a761</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Debug\solar.api.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
     <PackageReference Include="ElmahCore" Version="1.2.5" />
@@ -13,6 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>
