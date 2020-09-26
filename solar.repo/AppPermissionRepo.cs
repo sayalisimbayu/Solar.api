@@ -57,7 +57,7 @@ namespace solar.repo
                 SqlCommand command = new SqlCommand(String.Format(@"SELECT s.Mode,s.ALIAS,s.VALUE, ISNULL(p.ID,0) ID,
                         ISNULL(p.APPUSERID,@ID) APPUSERID, ISNULL(p.APPSETTINGID,s.ID) APPSETTINGID,
                         ISNULL(p.PERMISSION,0) PERMISSION
-                        FROM AppSettings s left join APPPERMISSION p on s.id=p.appsettingid and p.APPUSERID=@ID WHERE s.TYPE='M'", tableName));
+                        FROM AppSettings s left join {0} p on s.id=p.appsettingid and p.APPUSERID=@ID WHERE s.TYPE='M' {1}", tableName, (active ? " p.PERMISSION=1 " : "")));
                 command.Parameters.AddWithValue("@ID", id);
                 DataTable permissionData = DBServer.ExecuteDataTable(command);
                 if (permissionData.Rows.Count == 0)
