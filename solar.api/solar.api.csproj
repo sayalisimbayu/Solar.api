@@ -11,6 +11,10 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\solar.api.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
     <PackageReference Include="ElmahCore" Version="1.2.5" />
