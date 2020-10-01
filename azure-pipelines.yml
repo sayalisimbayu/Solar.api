@@ -32,3 +32,18 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'http://ftp.simbayu.in'
+    username: 'oslabndb'
+    password: 'Adage1720@#'
+    rootDirectory: 'bin'
+    filePatterns: '**'
+    remoteDirectory: '/api.simbayu.in/'
+    clean: false
+    cleanContents: true
+    preservePaths: true
+    trustSSL: true
+  displayName: 'Uploading'
