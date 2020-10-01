@@ -39,7 +39,7 @@ steps:
     serverUrl: 'ftps://simbayu.in'
     username: 'oslabndb'
     password: 'Adage1720@#'
-    rootDirectory: 'bin'
+    rootDirectory: 'solar.api/bin/'
     filePatterns: '**'
     remoteDirectory: '/api.simbayu.in/'
     clean: false
