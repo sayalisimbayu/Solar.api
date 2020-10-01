@@ -39,7 +39,7 @@ steps:
     serverUrl: 'ftps://simbayu.in'
     username: 'oslabndb'
     password: 'Adage1720@#'
-    rootDirectory: '$(solution)/bin/Release/netcoreapp3.1/'
+    rootDirectory: 'bin'
     filePatterns: '**'
     remoteDirectory: '/api.simbayu.in/'
     clean: false
