@@ -36,7 +36,7 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'http://ftp.simbayu.in'
+    serverUrl: 'ftps://simbayu.in'
     username: 'oslabndb'
     password: 'Adage1720@#'
     rootDirectory: '$(solution)/bin/Release/netcoreapp3.1/'
