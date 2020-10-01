@@ -39,8 +39,8 @@ steps:
     serverUrl: 'http://ftp.simbayu.in'
     username: 'oslabndb'
     password: 'Adage1720@#'
-    rootDirectory: '$(build.artifactStagingDirectory)'
-    filePatterns: 'WebApp.zip'
+    rootDirectory: 'bin'
+    filePatterns: '**'
     remoteDirectory: '/api.simbayu.in/'
     clean: false
     cleanContents: true
