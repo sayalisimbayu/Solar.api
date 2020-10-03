@@ -36,11 +36,11 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'http://ftp.simbayu.in'
+    serverUrl: 'ftps://simbayu.in'
     username: 'oslabndb'
     password: 'Adage1720@#'
-    rootDirectory: '$(build.artifactStagingDirectory)'
-    filePatterns: 'WebApp.zip'
+    rootDirectory: 'solar.api/bin/Release/netcoreapp3.1/'
+    filePatterns: '**'
     remoteDirectory: '/api.simbayu.in/'
     clean: false
     cleanContents: true
