@@ -4,7 +4,7 @@ using System.Text;
 
 namespace solar.models
 {
-    public class AppUserInfo
+    public class AppUserInfo: Base
     {
         public int ID { get; set; }
         public int USID { get; set; }
