@@ -576,6 +576,21 @@ namespace solar.services
             try
             {
                 AppNotification notification;
+                if (data.notificationid == 0)
+                {
+                    notification = new AppNotification()
+                    {
+                        type = _userRepo.GetInstance(tenant).tableName,
+                        message = "Saving data",
+                        progress = 0
+                    };
+                    _notificationRepo.GetInstance(tenant).save(ref notification);
+                    _hubContext.Clients.All.SendAsync("SendNotification", notification);
+                }
+                else
+                {
+                    notification = _notificationRepo.GetInstance(tenant).getById(data.notificationid);
+                }
                 try
                 {
                     using (var transaction = DBServer.BeginTransaction())
@@ -583,6 +598,11 @@ namespace solar.services
                         if (_userRepo.GetInstance(tenant).saveUser(ref data, transaction))
                         {
                             transaction.Commit();
+                            notification.progress = 1;
+                            notification.message = "Data saved sucessfully for User: " + data.DISPLAYNAME;
+                            notification.recordId = data.USID;
+                            _notificationRepo.GetInstance(tenant).save(ref notification);
+                            _hubContext.Clients.All.SendAsync("SendNotification", notification);
                             feedback = new Feedback
                             {
                                 Code = 1,
@@ -592,6 +612,12 @@ namespace solar.services
                         }
                         else
                         {
+                            transaction.Commit();
+                            notification.progress = 1;
+                            notification.message = "Data saved sucessfully";
+                            notification.recordId = data.USID;
+                            _notificationRepo.GetInstance(tenant).save(ref notification);
+                            _hubContext.Clients.All.SendAsync("SendNotification", notification);
                             feedback = new Feedback
                             {
                                 Code = 1,
@@ -604,6 +630,10 @@ namespace solar.services
                 }
                 catch (Exception ex)
                 {
+                    notification.progress = -1;
+                    notification.message = "Got the error while removing data";
+                    _notificationRepo.GetInstance(tenant).save(ref notification);
+                    _hubContext.Clients.All.SendAsync("SendNotification", notification);
                     feedback = new Feedback
                     {
                         Code = 0,
